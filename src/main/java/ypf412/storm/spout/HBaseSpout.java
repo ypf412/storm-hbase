@@ -163,14 +163,14 @@ public class HBaseSpout extends BaseRichSpout {
 	}
 	
 	/**
-	 * 负责单个 shard的扫描和发送操作
+	 * Scan a single sharding partition and send table data
 	 * 
 	 */
 	private class ShardScanner implements Runnable {
 
 		// HBase stream data generator
 		private HBaseStream hbaseStream;
-		// The sharding key of HBase table
+		// the sharding key of HBase table
 		private short shardingKey;
 		// the rowkey of scanning table last time
 		private byte[] lastRowKey;
