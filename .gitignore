@@ -1,6 +1,17 @@
 *.class
+*.log
+*.swp
+*.bak
 
 # Package Files #
 *.jar
 *.war
 *.ear
+
+# Project Dirs #
+.classpath
+.project
+.settings
+target
+build
+temp
