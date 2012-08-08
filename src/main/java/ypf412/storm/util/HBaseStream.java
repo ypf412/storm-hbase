@@ -42,6 +42,7 @@ public class HBaseStream {
 	
 	/**
 	 * Constructor Function
+	 * 
 	 */
 	public HBaseStream() {
 		this(0, 0);
@@ -49,6 +50,7 @@ public class HBaseStream {
 	
 	/**
 	 * Constructor Function
+	 * 
 	 * @param startTimestamp
 	 * @param stopTimestamp
 	 */
@@ -64,6 +66,7 @@ public class HBaseStream {
 	
 	/**
 	 * Constructor Function
+	 * 
 	 * @param hbasePropConfig
 	 * @param startTimestamp
 	 * @param stopTimestamp

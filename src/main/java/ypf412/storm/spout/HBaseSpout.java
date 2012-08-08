@@ -74,7 +74,7 @@ public class HBaseSpout extends BaseRichSpout {
 		try {
 			stormPropConfig = new PropConfig(stormPropPath);
 		} catch (IOException e1) {
-			LOG.error("Failed to load poperties", e1);
+			LOG.error("Failed to load properties", e1);
 			throw new RuntimeException(e1);
 		}
 		
@@ -104,7 +104,7 @@ public class HBaseSpout extends BaseRichSpout {
 		try {
 			hbasePropConfig = new PropConfig(hbasePropPath);
 		} catch (IOException e1) {
-			LOG.error("Failed to load poperties", e1);
+			LOG.error("Failed to load properties", e1);
 			throw new RuntimeException(e1);
 		}
 		
@@ -146,10 +146,11 @@ public class HBaseSpout extends BaseRichSpout {
 	
 	@Override
 	public void declareOutputFields(OutputFieldsDeclarer declarer) {
-		declarer.declare(new Fields("key", "value"));
+		declarer.declare(new Fields("sharding", "key", "value"));
 	}
 
 	/**
+	 * Put a tuple to queue 
 	 * 
 	 * @param tuple
 	 * @return
@@ -191,7 +192,7 @@ public class HBaseSpout extends BaseRichSpout {
 			String columnFamilyStr = hbasePropConfig.getProperty("hbase.table.column_family");
 			if (columnFamilyStr != null && !columnFamilyStr.equals(""))
 				this.columnFamily = Bytes.toBytes(columnFamilyStr);
-			this.columnFamily = Bytes.toBytes(Constants.HBASE_DEFAULT_COLUMN_FAMILY);
+			this.column = Bytes.toBytes(Constants.HBASE_DEFAULT_COLUMN);
 			String columnStr = hbasePropConfig.getProperty("hbase.table.column");
 			if (columnStr != null && !columnStr.equals(""))
 				this.column = Bytes.toBytes(columnStr);
@@ -220,7 +221,8 @@ public class HBaseSpout extends BaseRichSpout {
 							num++;
 							rowkey = rr.getRow();
 							value = rr.getValue(columnFamily, column);
-							putTuple(new Values(new StreamData(rowkey), new StreamData(value)));
+							short sharding = (short)rowkey[0];
+							putTuple(new Values(new Short(sharding), new StreamData(rowkey), new StreamData(value)));
 						}
 						if (num % mode == 0)
 							LOG.info("total records: " + num + ", total scan time: " + (System.currentTimeMillis() - startTime) + " ms");

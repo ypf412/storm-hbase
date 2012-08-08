@@ -13,6 +13,12 @@ All the configuration options can be found in `src/main/resources/storm.properti
 * the `shardingkey` takes up the 1st byte of rowkey, which means the data partitions number of HBase table and usually is a short type number.
 * the `timestamp` takes up the 2nd to 5th bytes of rowkey, which is an UNIX timestamp in second.
 
+## Getting help
+The code implementation of spout: [HBaseSpout.java](https://github.com/ypf412/storm-hbase/blob/master/src/main/java/ypf412/storm/spout/HBaseSpout.java).
+
+The test case of spout: [HBaseSpoutTest.java](https://github.com/ypf412/storm-hbase/blob/master/src/test/java/ypf412/storm/HBaseSpoutTest.java).
+
+How to use `HBaseSpout`, please refer to: [DumpToHBaseTopology.java](https://github.com/ypf412/storm-hbase/blob/master/src/main/java/ypf412/storm/topology/DumpToHBaseTopology.java) or [OutputTopology.java](https://github.com/ypf412/storm-hbase/blob/master/src/main/java/ypf412/storm/topology/OutputTopology.java).
+
 ## Contributors
-* ypf412 (ypf412@163.com)
-* jiuling.ypf (jiuling.ypf@taobao.com)
+* Yuan Panfeng ([@ypf412](https://github.com/ypf412))

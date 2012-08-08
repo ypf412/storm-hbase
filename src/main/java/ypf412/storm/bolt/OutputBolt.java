@@ -36,7 +36,9 @@ public class OutputBolt extends BaseRichBolt {
 	public void execute(Tuple input) {
 		List<Object> fields = input.getValues();
 		System.out.println("recv tuple: " + input + ", field num: " + fields.size());
-		for (int i=0; i<fields.size(); i++) {
+		Short sharding = (Short)fields.get(0);
+		System.out.println("tuple field 0: " + sharding);
+		for (int i=1; i<fields.size(); i++) {
 			StreamData streamData = (StreamData)fields.get(i);
 			System.out.println("tuple field " + i + ": " + Bytes.toString(streamData.getData()));
 		}

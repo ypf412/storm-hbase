@@ -28,9 +28,9 @@ public class DumpToHBaseBolt extends BaseRichBolt {
 	@Override
 	public void execute(Tuple input) {
 		List<Object> fields = input.getValues();
-		if (fields.size() == 2) {
-			StreamData rowKey = (StreamData)fields.get(0);
-			StreamData value = (StreamData)fields.get(1);
+		if (fields.size() == 3) {
+			StreamData rowKey = (StreamData)fields.get(1); //key field
+			StreamData value = (StreamData)fields.get(2); //value field
 			hbaseDumper.writeToTable(rowKey.getData(), value.getData());
 		}
 	}

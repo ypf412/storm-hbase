@@ -36,7 +36,7 @@ public class DumpToHBaseTopology {
 		
 		int boltTasks = spoutTasks;
 		builder.setBolt("dumpBolt", new DumpToHBaseBolt(), boltTasks)
-				.fieldsGrouping("hbaseSpout", new Fields("rowkey"));
+				.fieldsGrouping("hbaseSpout", new Fields("sharding"));
 
 		Config conf = new Config();
 		conf.put(Constants.STORM_PROP_CONF_FILE,
